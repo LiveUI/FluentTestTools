@@ -13,22 +13,22 @@ import VaporTestTools
 
 extension TestableProperty where TestableType: Application {
     
-    public func delete<T: Model>(allFor type: T.Type) where T.Database: QuerySupporting {
+    public func delete<T: Model>(allFor type: T.Type) {
         let req: Request = element.testable.fakeRequest()
         try! T.query(on: req).delete().wait()
     }
     
-    public func count<T: Model>(allFor type: T.Type) -> Int where T.Database: QuerySupporting {
+    public func count<T: Model>(allFor type: T.Type) -> Int {
         let req: Request = element.testable.fakeRequest()
         return try! T.query(on: req).count().wait()
     }
     
-    public func one<T: Model>(for type: T.Type, id: T.ID) -> T? where T.Database: QuerySupporting {
+    public func one<T: Model>(for type: T.Type, id: T.ID) -> T? {
         let req: Request = element.testable.fakeRequest()
         return try! T.query(on: req).filter(\T.fluentID == id).first().wait()
     }
     
-    public func all<T: Model>(for type: T.Type) -> [T] where T.Database: QuerySupporting {
+    public func all<T: Model>(for type: T.Type) -> [T] {
         let req: Request = element.testable.fakeRequest()
         return try! T.query(on: req).all().wait()
     }
